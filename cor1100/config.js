@@ -596,8 +596,8 @@ const CANVAS = {
   // Canvas assignment per item, reused all semester (not per-session like
   // Puzzles/Common Threads). aid: Canvas assignment ID; full URL auto-built
   // below.
-  wellness:   { aid: "22419" },
-  exitTicket: { aid: "22961" },
+  wellness:   { aid: "22961" },
+  exitTicket: { aid: "221418" },
 
   // NOTE: the Eli Review course join code is intentionally NOT stored here.
   // This file is served as public client-side JS on GitHub Pages, so
