@@ -163,13 +163,11 @@
 
   <!-- Course arc -->
   <div class="arc-strip" id="arcStrip">
-    <span class="arc-step"><a id="arcReadLink" href="#" target="_top"><strong>Read</strong> Hanley (PDF)</a></span>
+    <span class="arc-step"><a id="arcReadLink" href="#" target="_top"><strong>Read</strong> Hanley and Smith</a></span>
     <span class="arc-sep">→</span>
     <span class="arc-step"><strong>Attend</strong> class</span>
     <span class="arc-sep">→</span>
     <span class="arc-step"><strong>Complete</strong> Puzzle</span>
-    <span class="arc-sep">→</span>
-    <span class="arc-step"><a id="arcReflectLink" href="#" target="_top"><strong>Reflect</strong> on Smith</a></span>
     <span class="arc-sep">·</span>
     <span class="arc-step" id="arcSummary"></span>
   </div>
@@ -201,10 +199,9 @@ document.getElementById('footerText').textContent  = `${COURSE.code} · ${COURSE
 document.getElementById('wellnessLink').href   = CANVAS.wellness.url;
 document.getElementById('exitTicketLink').href = CANVAS.exitTicket.url;
 
-// Arc strip — link straight to the chapters page (Hanley + optional Smith
-// primary text) and to Common Threads, where students reflect on Smith directly.
-document.getElementById('arcReadLink').href    = PAGES.chapters;
-document.getElementById('arcReflectLink').href = PAGES.commonThreads;
+// Arc strip — link straight to the chapters page (Hanley chapters + the
+// optional Smith primary text reference row).
+document.getElementById('arcReadLink').href = PAGES.chapters;
 
 // Meta bar — Instructor + Email only. Full contact details (Office, Zoom,
 // Office Hours) live on the syllabus page, not duplicated here. Semester
