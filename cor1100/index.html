@@ -58,6 +58,8 @@
       display: flex; align-items: center; gap: 0.5rem;
     }
     .arc-step strong { color: var(--crimson); font-weight: 600; }
+    .arc-step a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--muted); }
+    .arc-step a:hover { border-bottom-color: var(--crimson); }
     .arc-sep { color: var(--gold); font-size: 0.8rem; }
 
     /* Card grid — auto-fill for variable card count */
@@ -161,13 +163,13 @@
 
   <!-- Course arc -->
   <div class="arc-strip" id="arcStrip">
-    <span class="arc-step"><strong>Read</strong> Hanley (PDF)</span>
+    <span class="arc-step"><a id="arcReadLink" href="#" target="_top"><strong>Read</strong> Hanley (PDF)</a></span>
     <span class="arc-sep">→</span>
     <span class="arc-step"><strong>Attend</strong> class</span>
     <span class="arc-sep">→</span>
     <span class="arc-step"><strong>Complete</strong> Puzzle</span>
     <span class="arc-sep">→</span>
-    <span class="arc-step"><strong>Reflect</strong> on Smith</span>
+    <span class="arc-step"><a id="arcReflectLink" href="#" target="_top"><strong>Reflect</strong> on Smith</a></span>
     <span class="arc-sep">·</span>
     <span class="arc-step" id="arcSummary"></span>
   </div>
@@ -198,6 +200,11 @@ document.getElementById('footerText').textContent  = `${COURSE.code} · ${COURSE
 // Wellness card
 document.getElementById('wellnessLink').href   = CANVAS.wellness.url;
 document.getElementById('exitTicketLink').href = CANVAS.exitTicket.url;
+
+// Arc strip — link straight to the chapters page (Hanley + optional Smith
+// primary text) and to Common Threads, where students reflect on Smith directly.
+document.getElementById('arcReadLink').href    = PAGES.chapters;
+document.getElementById('arcReflectLink').href = PAGES.commonThreads;
 
 // Meta bar — Instructor + Email only. Full contact details (Office, Zoom,
 // Office Hours) live on the syllabus page, not duplicated here. Semester
