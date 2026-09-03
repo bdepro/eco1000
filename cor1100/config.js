@@ -245,14 +245,18 @@ const SCHEDULE = {
 //  at the bottom of this file. No Perusall — students get a direct PDF
 //  link (guided notes + a Puzzle cover the reading instead of an
 //  annotation tool).
+//  tmsFileId (optional): Canvas Files file ID for a PDF excerpt of
+//  Smith's Theory of Moral Sentiments itself (not Hanley's commentary)
+//  covering that chapter — renders an "Open TMS Excerpt" link on that
+//  row. Only set where such an excerpt has been uploaded.
 //  UPDATE each semester once that term's PDFs are uploaded to Canvas Files
 // ================================================================
 const CHAPTERS = {
 
   all: [
     { key: "intro", num: "Intro",      title: "Introduction",                   session: 1,  fileId: "363042" },
-    { key: "ch1",   num: "Ch. I",      title: "On Self-Interest",               session: 1,  fileId: "363043" },
-    { key: "ch2",   num: "Ch. II",     title: "On Caring for Others",           session: 1,  fileId: "363044" },
+    { key: "ch1",   num: "Ch. I",      title: "On Self-Interest",               session: 1,  fileId: "363043", tmsFileId: "610109" },
+    { key: "ch2",   num: "Ch. II",     title: "On Caring for Others",           session: 1,  fileId: "363044", tmsFileId: "610113" },
     { key: "ch3",   num: "Ch. III",    title: "On Acting for Others",           session: 2,  fileId: "363045" },
     { key: "ch4",   num: "Ch. IV",     title: "On Imagination",                 session: 2,  fileId: "363046" },
     { key: "ch5",   num: "Ch. V",      title: "On Bettering Our Condition",     session: 2,  fileId: "363047" },
@@ -665,7 +669,10 @@ const ASSIGNMENT_URL = aid =>
 const FILE_URL = fileId =>
   fileId ? `${COURSE.canvasBase}/courses/${COURSE.canvasId}/files/${fileId}` : '';
 
-CHAPTERS.all.forEach(item => { item.url = FILE_URL(item.fileId); });
+CHAPTERS.all.forEach(item => {
+  item.url = FILE_URL(item.fileId);
+  item.tmsUrl = FILE_URL(item.tmsFileId);
+});
 
 [CANVAS.puzzles, CANVAS.commonThreads, CANVAS.indicatorAnalysis]
   .forEach(arr => arr.forEach(item => { item.url = ASSIGNMENT_URL(item.aid); }));

@@ -54,15 +54,17 @@
     .ch-session{font-size:0.72rem;color:var(--muted);display:block;margin-top:2px;font-weight:400;}
     .ch-scope-note{font-size:0.72rem;color:var(--crimson);display:block;margin-top:2px;font-weight:600;}
     .ch-actions{display:flex;align-items:stretch;}
-    .ch-link,.ch-notes-link,.ch-submit-link{padding:0.85rem 1rem;display:flex;align-items:center;gap:5px;text-decoration:none;font-size:0.78rem;font-weight:600;white-space:nowrap;border-left:1px solid rgba(181,154,87,0.12);transition:background 0.12s;}
+    .ch-link,.ch-notes-link,.ch-submit-link,.ch-tms-link{padding:0.85rem 1rem;display:flex;align-items:center;gap:5px;text-decoration:none;font-size:0.78rem;font-weight:600;white-space:nowrap;border-left:1px solid rgba(181,154,87,0.12);transition:background 0.12s;}
     .ch-link{color:var(--gold-link);}
     .ch-link:hover{background:var(--warm-gray);}
     .ch-notes-link{color:var(--teal-dk);}
     .ch-notes-link:hover{background:var(--warm-gray);}
     .ch-submit-link{color:var(--crimson);}
     .ch-submit-link:hover{background:var(--warm-gray);}
-    .ch-link svg,.ch-notes-link svg,.ch-submit-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
-    .ch-link.inactive,.ch-notes-link.inactive,.ch-submit-link.inactive{color:var(--disabled);pointer-events:none;font-weight:400;}
+    .ch-tms-link{color:var(--gold-link);font-style:italic;}
+    .ch-tms-link:hover{background:var(--warm-gray);}
+    .ch-link svg,.ch-notes-link svg,.ch-submit-link svg,.ch-tms-link svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+    .ch-link.inactive,.ch-notes-link.inactive,.ch-submit-link.inactive,.ch-tms-link.inactive{color:var(--disabled);pointer-events:none;font-weight:400;}
     footer{text-align:center;padding:1.5rem 1rem;font-size:0.76rem;color:var(--muted);border-top:1px solid var(--border);max-width:860px;margin:0 auto;}
     @media(max-width:600px){
       .screen-header{padding:1.5rem 1.25rem;}
@@ -70,7 +72,7 @@
       .ch-row{grid-template-columns:3.5rem 1fr auto;}
       .ch-body{font-size:0.82rem;}
       .ch-actions{flex-direction:column;}
-      .ch-link,.ch-notes-link,.ch-submit-link{padding:0.6rem 0.75rem;border-left:none;border-top:1px solid rgba(181,154,87,0.12);}
+      .ch-link,.ch-notes-link,.ch-submit-link,.ch-tms-link{padding:0.6rem 0.75rem;border-left:none;border-top:1px solid rgba(181,154,87,0.12);}
       .ch-actions>:first-child{border-top:none;}
     }
     .skip-link{position:absolute;left:-9999px;top:0;background:var(--crimson);color:var(--white);padding:8px 14px;font-weight:600;font-size:0.85rem;text-decoration:none;z-index:100;}
@@ -95,7 +97,7 @@
     <strong>Click any chapter to open the PDF through Canvas.</strong> No separate account is needed. All chapters are due Wednesday at 11:59 p.m. of the relevant week; Chapter XI is not assigned. Guided notes are optional — submit completed notes through Canvas for 2 points toward that week's Puzzle score (1.6 points if submitted within one week late). Each guided-notes document covers several chapters — the Guided Notes link appears on the first chapter it covers, and the Submit Notes link appears once, on the last (both marked below).
   </div>
   <div class="callout gold">
-    <strong>Want to read Smith directly?</strong> Hanley's chapters are about Adam Smith's <cite>Theory of Moral Sentiments</cite> &mdash; they are not the book itself. We may draw on it in class discussion, and reading the original alongside Hanley can deepen your understanding. Elon's library has a copy: <a href="https://elonuniversity.on.worldcat.org/oclc/8171048" target="_blank" rel="noopener">Theory of Moral Sentiments in WorldCat</a>.
+    <strong>Want to read Smith directly?</strong> Hanley's chapters are about Adam Smith's <cite>Theory of Moral Sentiments</cite> &mdash; they are not the book itself. We may draw on it in class discussion, and reading the original alongside Hanley can deepen your understanding. Elon's library has a copy: <a href="https://elonuniversity.on.worldcat.org/oclc/8171048" target="_blank" rel="noopener">Theory of Moral Sentiments in WorldCat</a>. Where a chapter has a TMS excerpt available, an "Open TMS Excerpt" link appears on that row below.
   </div>
   <p class="section-label">For all chapters</p>
   <div class="ref-row">
@@ -134,10 +136,17 @@ CHAPTERS.all.forEach(function(ch) {
   var hasNotes  = ch.guidedNotesUrl && ch.guidedNotesUrl.length > 0;
   var hasSubmit = ch.notesSubmitUrl && ch.notesSubmitUrl.length > 0;
   var isSubmitRow = ch.notesCoversLabel && ch.notesCoversLabel.length > 0;
+  var hasTms = ch.tmsUrl && ch.tmsUrl.length > 0;
 
   var notesLink = hasNotes ?
     '<a class="ch-notes-link" href="' + ch.guidedNotesUrl + '" target="_blank" rel="noopener">' +
       'Guided Notes' +
+      '<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>' +
+    '</a>' : '';
+
+  var tmsLink = hasTms ?
+    '<a class="ch-tms-link" href="' + ch.tmsUrl + '" target="_blank" rel="noopener">' +
+      'Open TMS Excerpt' +
       '<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>' +
     '</a>' : '';
 
@@ -166,7 +175,7 @@ CHAPTERS.all.forEach(function(ch) {
       '<span class="ch-session">Week ' + ch.session + '</span>' +
       scopeNote +
     '</div>' +
-    '<div class="ch-actions">' + notesLink + readingLink + submitLink + '</div>';
+    '<div class="ch-actions">' + notesLink + readingLink + tmsLink + submitLink + '</div>';
   list.appendChild(row);
 });
 </script>
