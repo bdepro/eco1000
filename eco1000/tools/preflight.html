@@ -219,18 +219,19 @@ if (QUESTIONS.bundle.length !== QUESTIONS.voteProcess.bundleSize) {
 // URLs are now auto-built from COURSE.canvasId + aid, so the canvasId
 // mismatch case is impossible. Instead we verify that every entry has
 // an aid — without one, the derived URL is broken.
-const checkAid = (arr, name, keyField) => {
-  const missing = arr.filter(x => !x.aid);
+const checkAid = (arr, name, keyField, idField) => {
+  idField = idField || 'aid';
+  const missing = arr.filter(x => !x[idField]);
   if (missing.length > 0) {
-    fail(`${name}: ${missing.length}/${arr.length} entries missing <code>aid</code> — derived URL will be broken`);
+    fail(`${name}: ${missing.length}/${arr.length} entries missing <code>${idField}</code> — derived URL will be broken`);
     missing.slice(0, 5).forEach(x =>
-      fail(`&nbsp;&nbsp;&nbsp;${name}[${keyField}=${x[keyField]}] has no aid`));
+      fail(`&nbsp;&nbsp;&nbsp;${name}[${keyField}=${x[keyField]}] has no ${idField}`));
   } else {
-    ok(`${name}: all ${arr.length} entries have aid populated`);
+    ok(`${name}: all ${arr.length} entries have ${idField} populated`);
   }
 };
-checkAid(CHAPTERS.core,        'CHAPTERS.core',        'key');
-checkAid(CHAPTERS.application, 'CHAPTERS.application', 'key');
+checkAid(CHAPTERS.core,        'CHAPTERS.core',        'key', 'moduleItemId');
+checkAid(CHAPTERS.application, 'CHAPTERS.application', 'key', 'moduleItemId');
 checkAid(CANVAS.puzzles,       'CANVAS.puzzles',       'session');
 checkAid(CANVAS.mme,           'CANVAS.mme',           'id');
 

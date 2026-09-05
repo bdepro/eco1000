@@ -269,31 +269,35 @@ const SCHEDULE = {
 const CHAPTERS = {
 
   // Core chapters — tested on Check-Ins #1 through #3
-  // aid: Canvas assignment ID — UPDATE each semester if assignments are rebuilt.
+  // moduleItemId: Canvas Modules item ID for the ungraded e-book chapter
+  // link (published module item, External Tool, no line item/points —
+  // Assignment-based LTI links get zeroed in the gradebook, so chapter
+  // reading links live in a module instead). UPDATE each semester once
+  // that term's E-Book module is rebuilt.
   // notesAid: Canvas assignment ID for the 0-points-possible guided-notes
   // submission (2 pts on time / 1.6 pts late, graded manually, same
   // Assignment Group as Puzzles, outside drop-lowest — see project memory
   // "ECO 1000 Guided Notes Bonus Policy"). UPDATE once that term's 7
   // submission assignments are built in Canvas.
-  // Full URLs are auto-built from COURSE.canvasId + aid/notesAid at the bottom of this file.
+  // Full URLs are auto-built from COURSE.canvasId + moduleItemId/notesAid at the bottom of this file.
   core: [
-    { key: "ch1",  num: "Ch. 1",  title: "The Economic Approach",                              session: 1,  aid: "2842", notesAid: "9153", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch01-guided-notes.html` },
-    { key: "ch3",  num: "Ch. 3",  title: "Demand, Supply, and the Market Process",             session: 2,  aid: "2843", notesAid: "9154", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch03-guided-notes.html` },
-    { key: "ch4",  num: "Ch. 4",  title: "Demand and Supply: Applications and Extensions",     session: 4,  aid: "2844", notesAid: "9155", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch04-guided-notes.html` },
-    { key: "ch7",  num: "Ch. 7",  title: "Taking the Nation's Economic Pulse",                 session: 5,  aid: "2845", notesAid: "9156", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch07-guided-notes.html` },
-    { key: "ch8",  num: "Ch. 8",  title: "Economic Fluctuations, Unemployment, and Inflation", session: 7,  aid: "2853", notesAid: "9157", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch08-guided-notes.html` },
-    { key: "ch16", num: "Ch. 16", title: "Creating an Environment for Growth and Prosperity",  session: 9,  aid: "2846", notesAid: "9158", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch16-guided-notes.html` },
-    { key: "ch18", num: "Ch. 18", title: "Gaining from International Trade",                   session: 10, aid: "2847", notesAid: "9159", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch18-guided-notes.html` },
+    { key: "ch1",  num: "Ch. 1",  title: "The Economic Approach",                              session: 1,  moduleItemId: "317510", notesAid: "9153", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch01-guided-notes.html` },
+    { key: "ch3",  num: "Ch. 3",  title: "Demand, Supply, and the Market Process",             session: 2,  moduleItemId: "317511", notesAid: "9154", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch03-guided-notes.html` },
+    { key: "ch4",  num: "Ch. 4",  title: "Demand and Supply: Applications and Extensions",     session: 4,  moduleItemId: "317512", notesAid: "9155", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch04-guided-notes.html` },
+    { key: "ch7",  num: "Ch. 7",  title: "Taking the Nation's Economic Pulse",                 session: 5,  moduleItemId: "317515", notesAid: "9156", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch07-guided-notes.html` },
+    { key: "ch8",  num: "Ch. 8",  title: "Economic Fluctuations, Unemployment, and Inflation", session: 7,  moduleItemId: "317516", notesAid: "9157", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch08-guided-notes.html` },
+    { key: "ch16", num: "Ch. 16", title: "Creating an Environment for Growth and Prosperity",  session: 9,  moduleItemId: "317517", notesAid: "9158", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch16-guided-notes.html` },
+    { key: "ch18", num: "Ch. 18", title: "Gaining from International Trade",                   session: 10, moduleItemId: "317518", notesAid: "9159", guidedNotesUrl: `${COURSE.baseUrl}/guided-notes/ch18-guided-notes.html` },
   ],
 
   // Application reference chapters — student-selected questions in S12-S13
   // Not directly tested; students use them as analytical lenses
   application: [
-    { key: "ch5",  num: "Ch. 5",  title: "Difficult Cases for the Market, and the Role of Government", aid: "2848" },
-    { key: "ch6",  num: "Ch. 6",  title: "The Economics of Political Action",                           aid: "2849" },
-    { key: "ch23", num: "Ch. 23", title: "Price-Searcher Markets with Low Entry Barriers",              aid: "2850" },
-    { key: "ch26", num: "Ch. 26", title: "Earnings, Productivity, and the Job Market",                  aid: "2851" },
-    { key: "ch28", num: "Ch. 28", title: "Income Inequality and Poverty",                               aid: "2852" },
+    { key: "ch5",  num: "Ch. 5",  title: "Difficult Cases for the Market, and the Role of Government", moduleItemId: "317513" },
+    { key: "ch6",  num: "Ch. 6",  title: "The Economics of Political Action",                           moduleItemId: "317514" },
+    { key: "ch23", num: "Ch. 23", title: "Price-Searcher Markets with Low Entry Barriers",              moduleItemId: "317519" },
+    { key: "ch26", num: "Ch. 26", title: "Earnings, Productivity, and the Job Market",                  moduleItemId: "317520" },
+    { key: "ch28", num: "Ch. 28", title: "Income Inequality and Poverty",                               moduleItemId: "317521" },
   ],
 
   // Standing threads — appear on every check-in regardless of session content
@@ -694,11 +698,20 @@ const BLOCKS = [
 //  URL DERIVATION — do not edit
 //  Builds .url on every assignment entry from COURSE.canvasId + aid.
 //  Consumers continue to read .url as before; aid is the source of truth.
+//  Chapter reading links are Canvas Modules items (not assignments) so
+//  they carry no line item/points and can't show up as zeros in the
+//  gradebook; .url for those is built from moduleItemId instead.
 // ================================================================
 const ASSIGNMENT_URL = aid =>
   aid ? `${COURSE.canvasBase}/courses/${COURSE.canvasId}/assignments/${aid}` : '';
 
-[CHAPTERS.core, CHAPTERS.application, CANVAS.puzzles, CANVAS.mme, CANVAS.indicatorAnalysis]
+const MODULE_ITEM_URL = moduleItemId =>
+  moduleItemId ? `${COURSE.canvasBase}/courses/${COURSE.canvasId}/modules/items/${moduleItemId}` : '';
+
+[CHAPTERS.core, CHAPTERS.application]
+  .forEach(arr => arr.forEach(item => { item.url = MODULE_ITEM_URL(item.moduleItemId); }));
+
+[CANVAS.puzzles, CANVAS.mme, CANVAS.indicatorAnalysis]
   .forEach(arr => arr.forEach(item => { item.url = ASSIGNMENT_URL(item.aid); }));
 
 [CANVAS.wellness, CANVAS.exitTicket]
