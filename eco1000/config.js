@@ -626,6 +626,15 @@ const CANVAS = {
   // stage. NOT the same as the task-specific urls above.
   eliDashboardUrl: "https://app.elireview.com/student/course/20937",
 
+  // Written Narrative support docs — uploaded directly to Canvas Files
+  // (mind-voice folder): one explains the rationale ("why"), the other is
+  // a quick reference sheet. fileId: Canvas file ID; full URL is auto-built
+  // from COURSE.canvasId + fileId at the bottom of this file.
+  narrativeResources: [
+    { id: "why",       title: "Why This Narrative",        fileId: "617078" },
+    { id: "reference", title: "Narrative Reference Sheet",  fileId: "617079" },
+  ],
+
   // Wellness Check-In / Exit Ticket — index.html's wellness card. One static
   // Canvas assignment per item, reused all semester (not per-session like
   // Puzzles/MME). aid: Canvas assignment ID; full URL auto-built below.
@@ -708,11 +717,16 @@ const ASSIGNMENT_URL = aid =>
 const MODULE_ITEM_URL = moduleItemId =>
   moduleItemId ? `${COURSE.canvasBase}/courses/${COURSE.canvasId}/modules/items/${moduleItemId}` : '';
 
+const FILE_URL = fileId =>
+  fileId ? `${COURSE.canvasBase}/courses/${COURSE.canvasId}/files/${fileId}` : '';
+
 [CHAPTERS.core, CHAPTERS.application]
   .forEach(arr => arr.forEach(item => { item.url = MODULE_ITEM_URL(item.moduleItemId); }));
 
 [CANVAS.puzzles, CANVAS.mme, CANVAS.indicatorAnalysis]
   .forEach(arr => arr.forEach(item => { item.url = ASSIGNMENT_URL(item.aid); }));
+
+CANVAS.narrativeResources.forEach(item => { item.url = FILE_URL(item.fileId); });
 
 [CANVAS.wellness, CANVAS.exitTicket]
   .forEach(item => { item.url = ASSIGNMENT_URL(item.aid); });
