@@ -115,6 +115,17 @@
       that takes. What matters is the finished narrative: your moment, worked
       all the way through to the moral story inside it. Submit that through
       Canvas once it's done.</p>
+      <div class="callout teal">
+        <strong>Getting into Eli Review.</strong> Go to
+        <a href="https://app.elireview.com" target="_blank" rel="noopener">app.elireview.com</a>
+        and choose "New here? Sign up!" to create a student account (use your
+        Elon email). Then enter the course code I give you in class to join
+        our course; it'll appear on your dashboard once you do. Eli is a
+        paid course tool, like a textbook: one term is $28.95 (valid 4 months)
+        or one year is $52.95 (valid 12 months). You get a 7-day grace period
+        to start working before you need to pay, so joining now and paying
+        later is fine.
+      </div>
       <div class="pill-row" id="narrativePills"></div>
     </div>
   </div>
@@ -229,7 +240,10 @@ function pill(label, url) {
 
 // Narrative pills
 var narrativePills = document.getElementById('narrativePills');
-narrativePills.appendChild(pill('Open your Mind workspace', CANVAS.eliDashboardUrl));
+narrativePills.appendChild(pill("Eli Review's Writing Space", CANVAS.eliDashboardUrl));
+(CANVAS.narrativeResources || []).forEach(function(r) {
+  narrativePills.appendChild(pill(r.title, r.url));
+});
 
 // Viva pills
 var vivaPills = document.getElementById('vivaPills');

@@ -596,6 +596,16 @@ const CANVAS = {
   // specific task) — every Mind & Voice checklist link points here.
   eliDashboardUrl: "https://app.elireview.com/student/course/21054",
 
+  // Written Narrative support docs — uploaded directly to Canvas Files
+  // (mind-voice folder): one explains the rationale ("why"), the other is
+  // a quick reference sheet. fileId: Canvas file ID; full URL is auto-built
+  // from COURSE.canvasId + fileId (via FILE_URL below) at the bottom of
+  // this file.
+  narrativeResources: [
+    { id: "why",       title: "Why This Narrative",        fileId: "617128" },
+    { id: "reference", title: "Narrative Reference Sheet",  fileId: "617130" },
+  ],
+
   // Wellness Check-In / Exit Ticket — index.html's wellness card. One static
   // Canvas assignment per item, reused all semester (not per-session like
   // Puzzles/Common Threads). aid: Canvas assignment ID; full URL auto-built
@@ -673,6 +683,8 @@ CHAPTERS.all.forEach(item => {
   item.url = FILE_URL(item.fileId);
   item.tmsUrl = FILE_URL(item.tmsFileId);
 });
+
+CANVAS.narrativeResources.forEach(item => { item.url = FILE_URL(item.fileId); });
 
 [CANVAS.puzzles, CANVAS.commonThreads, CANVAS.indicatorAnalysis]
   .forEach(arr => arr.forEach(item => { item.url = ASSIGNMENT_URL(item.aid); }));
